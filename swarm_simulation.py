@@ -165,6 +165,7 @@ def rand_x():
 def rand_y():
     return randint(20,screen_height-20)
 
+''' Player(x_coordinate, y_coordinate, weight, charge, radius)'''
 player1 = Player(rand_x(), rand_y(), 100, 50, 10)
 player2 = Player(rand_x(), rand_y(), 100, 50, 10)
 player3 = Player(rand_x(), rand_y(), 100, 50, 10)
