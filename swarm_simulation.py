@@ -1,6 +1,5 @@
-import pygame, sys
-import math
-import numpy as np
+import pygame
+import math, sys
 from random import randint
 
 pygame.init()
@@ -8,7 +7,7 @@ clock = pygame.time.Clock()
 
 screen_width = 1000
 screen_height = 700
-friction = 0.999
+friction = 0.9999
 elasticity = 0.6
 screen = pygame.display.set_mode((screen_width, screen_height))
 pygame.display.set_caption("Swarm")
@@ -17,7 +16,7 @@ class Player():
     def __init__(self, x, y, mass, charge, radius):
         self.body = pygame.Rect(x, y, radius*2, radius*2)
         self.radius = radius
-        self.speed_x = -15
+        self.speed_x = 15
         self.speed_y = -15
         self.acc_x = 0
         self.acc_y = 0
@@ -35,20 +34,17 @@ def EMField(player_list):
     for player in player_list:
         player_center = player_center_list[a]
         distances = [math.hypot((player_center[0] - player2_center[0]), (player_center[1] - player2_center[1])) for player2_center in player_center_list]
-        force_x = 0
-        force_y = 0
+        acc_x = 0
+        acc_y = 0
         b = 0
         for player2 in player_list:
             if distances[b] == 0:
                 b += 1
                 continue
             force = (player.charge*player2.charge)/distances[b]**2
-            force_x += player_center[0] - (player_center[0] - (force/player.mass*(player_center[0]-player_center_list[b][0]))/distances[b])
-            force_y += player_center[1] - (player_center[1] - (force/player.mass*(player_center[1]-player_center_list[b][1]))/distances[b])
+            acc_x += player_center[0] - (player_center[0] - (force/player.mass*(player_center[0]-player_center_list[b][0]))/distances[b])
+            acc_y += player_center[1] - (player_center[1] - (force/player.mass*(player_center[1]-player_center_list[b][1]))/distances[b])
             b += 1
-
-        acc_x = force_x
-        acc_y = force_y
 
         acc_x *= friction
         acc_y *= friction
@@ -131,6 +127,7 @@ def Detect_collision(player_list):
                 player2_body.centery += math.cos(angle)*overlap
                 player2.body = player2_body
 
+
         '''Wall collisions'''
         if player_body.left <= 0:
             player_body.left = 0
@@ -148,13 +145,13 @@ def Detect_collision(player_list):
             player_body.bottom = screen_height
             speed_y *= -1
 
+
         speed_x *= friction
         speed_y *= friction
 
-        player_body.centerx += speed_x
-        player_body.centery += speed_y
+        player_body.centerx += round(speed_x)
+        player_body.centery += round(speed_y)
 
-        player.body = player_body
         player.speed_x = speed_x
         player.speed_y = speed_y
 
@@ -165,17 +162,13 @@ def rand_x():
 def rand_y():
     return randint(20,screen_height-20)
 
-''' Player(x_coordinate, y_coordinate, weight, charge, radius)'''
-player1 = Player(rand_x(), rand_y(), 100, 50, 10)
-player2 = Player(rand_x(), rand_y(), 100, 50, 10)
-player3 = Player(rand_x(), rand_y(), 100, 50, 10)
-player4 = Player(rand_x(), rand_y(), 100, 50, 10)
-player5 = Player(rand_x(), rand_y(), 100, 50, 10)
-player6 = Player(rand_x(), rand_y(), 100, 50, 10)
-player7 = Player(rand_x(), rand_y(), 100, 50, 10)
-player8 = Player(rand_x(), rand_y(), 100, 50, 10)
-player9 = Player(rand_x(), rand_y(), 100, 50, 10)
-player_list = [player1, player2, player3, player4, player5, player6, player7, player8, player9]
+
+player_list = []
+charge_list = [50, 50, 50, 50, 50, 50, -50, 50, 50, 50, 50, 50, 50, 50, 50]
+
+for charge in charge_list:
+    player_list.append(Player(rand_x(), rand_y(), 100, charge, 10))
+
 bg_color = pygame.Color('grey12')
 p_color = (200,150,200)
 
