@@ -12,6 +12,8 @@ clock = pygame.time.Clock()
 
 screen_width = 1000
 screen_height = 700
+screen = pygame.display.set_mode((screen_width, screen_height))
+pygame.display.set_caption("Swarm")
 friction = 0.9999
 elasticity = 0.87
 player_colors = ["green" if a < 10 else "maroon" if a >= 10 else None for a in range(20)]
