@@ -18,6 +18,7 @@ The 680912_1195657_compressed_replay_buffer.npy.zip file contains the data I col
 A few things I would change about this project would be to make it possible to pass in the beginning state of the board as well as the end state so I could do it from any starting position. Another thing that I would change is the fact that right now a specific ball would need to be in a specific place for it to count so I would want to try and make it possible so that any ball could take that position and if any balls were missing it would still form the general shape.
 
 Inspirations for this work include the following:
+
 https://arxiv.org/pdf/1912.02877.pdf
 
 https://distill.pub/2020/growing-ca/
