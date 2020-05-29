@@ -1,4 +1,3 @@
-
 import pygame, math
 from random import randint, uniform, sample, shuffle
 import torch
@@ -6,8 +5,7 @@ from torch import nn
 import torch.nn.functional as F
 import numpy as np
 from tqdm import tqdm
-import ray
-ray.init()
+
 
 pygame.init()
 clock = pygame.time.Clock()
@@ -205,6 +203,7 @@ def Detect_collision(player_list):
     return player_list
 
 ChargeNet = chargeNet()
+
 '''Add the path to ChargeNet.tar'''
 checkpoint = torch.load("PATH")
 ChargeNet.load_state_dict(checkpoint["model"])
