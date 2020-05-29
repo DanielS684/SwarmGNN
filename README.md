@@ -1,4 +1,4 @@
-# SwarmGNN
+# SwarmNet
 This is my first github project just seeing how stuff work.
 
 This project is going to try and control a swarm of robots (balls) by changing their electric charge.
