@@ -19,7 +19,9 @@ A few things I would change about this project would be to make it possible to p
 
 Inspirations for this work include the following:
 https://arxiv.org/pdf/1912.02877.pdf
+
 https://distill.pub/2020/growing-ca/
+
 https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life
 
 PS. Also for funsies I listen to podcasts from this person called Lex Fridman and he does amazing interviews on AI, physics, etc.
